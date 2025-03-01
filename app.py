@@ -7,7 +7,7 @@ app = Flask(__name__)
 CORS(app)  # Allow frontend to communicate with backend
 
 # Database configuration
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"  # Use PostgreSQL/MySQL in production
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"#"postgresql://postgres:Tavishi%2A1234@db.gbxgrkpwoqllqziwvqtv.supabase.co:5432/postgres"#  # Use PostgreSQL/MySQL in production
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
@@ -37,7 +37,7 @@ def signup():
         return jsonify({"message": "Email already exists"}), 400
 
     hashed_password = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
-
+    # print(password) # Tavishi
     new_user = User(name=name, email=email, password=hashed_password.decode("utf-8"))
     db.session.add(new_user)
     db.session.commit()
